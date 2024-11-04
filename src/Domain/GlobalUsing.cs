@@ -1,1 +1,2 @@
-﻿global using SharedKernel;
+﻿global using System.Collections.ObjectModel;
+global using SharedKernel;

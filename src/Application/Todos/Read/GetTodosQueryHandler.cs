@@ -17,7 +17,7 @@ sealed class GetTodosQueryHandler(IApplicationDbContext context, IUserContext us
 				UserId = todoItem.UserId,
 				Description = todoItem.Description,
 				DueDate = todoItem.DueDate == null ? null : ((DateTimeOffset)todoItem.DueDate).LocalDateTime,
-				Labels = todoItem.Labels,
+				Labels = todoItem.Labels.AsReadOnly(),
 				IsCompleted = todoItem.IsCompleted,
 				CreatedAt = ((DateTimeOffset)todoItem.CreatedAt).LocalDateTime,
 				CompletedAt = todoItem.CompletedAt == null ? null : ((DateTimeOffset)todoItem.CompletedAt).LocalDateTime,

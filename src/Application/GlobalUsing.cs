@@ -1,4 +1,5 @@
-﻿global using System.Reflection;
+﻿global using System.Collections.ObjectModel;
+global using System.Reflection;
 global using Application.Abstractions.Authentication;
 global using Application.Abstractions.Behaviors;
 global using Application.Abstractions.Data;

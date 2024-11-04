@@ -6,7 +6,7 @@ public sealed record UserResponse
 	/// <summary>Unique identifier.</summary>
 	public required Guid Id { get; init; }
 
-	/// <summary>eMAIL ADDRESS.</summary>
+	/// <summary>Email address.</summary>
 	public required string Email { get; init; }
 
 	/// <summary>First Name.</summary>

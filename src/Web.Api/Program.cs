@@ -52,7 +52,7 @@ ApiVersionSet apiVersionSet = app.NewApiVersionSet()
 
 // Register the routing group
 RouteGroupBuilder versionedGroup = app
-	.MapGroup("api/v{version:apiVersion}")
+	.MapGroup("v{version:apiVersion}")
 	.WithApiVersionSet(apiVersionSet);
 
 app.UseHttpsRedirection();
