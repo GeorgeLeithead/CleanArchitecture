@@ -399,3 +399,4 @@ FodyWeavers.xsd
 
 .containers/
 /src/Web.Api/api.http
+/.env
