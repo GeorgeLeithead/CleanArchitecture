@@ -1,0 +1,19 @@
+﻿namespace Web.Api;
+using Web.Api.Infrastructure;
+
+static class DependencyInjection
+{
+	public static IServiceCollection AddPresentation(this IServiceCollection services)
+	{
+		_ = services.AddEndpointsApiExplorer();
+		_ = services.AddSwaggerGen();
+
+		// REMARK: If you want to use Controllers, you'll need this.
+		_ = services.AddControllers();
+
+		_ = services.AddExceptionHandler<GlobalExceptionHandler>();
+		_ = services.AddProblemDetails();
+
+		return services;
+	}
+}
