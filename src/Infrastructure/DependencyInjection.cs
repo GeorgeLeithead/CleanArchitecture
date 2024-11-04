@@ -46,7 +46,7 @@ public static class ApplicationDependencyInjection
 
 	static IServiceCollection AddAuthenticationInternal(this IServiceCollection services, IConfiguration configuration)
 	{
-		string key = Environment.GetEnvironmentVariable("Jwt_Secret") ?? throw new ArgumentException("JWT key is not configured.");
+		string key = Environment.GetEnvironmentVariable("Jwt_Secret") ?? string.Empty; //// ?? throw new ArgumentException("JWT key is not configured.");
 		_ = services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 			.AddJwtBearer(o =>
 			{

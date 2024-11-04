@@ -3,7 +3,7 @@
     "http": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "swagger",
+      "launchUrl": "scalar/v1",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "Jwt_Secret": "super-duper-secret-value-that-should-be-in-user-secrets"
@@ -14,7 +14,7 @@
     "https": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "swagger",
+      "launchUrl": "scalar/v1",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "Jwt_Secret": "super-duper-secret-value-that-should-be-in-user-secrets"
@@ -25,7 +25,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "swagger",
+      "launchUrl": "scalar/v1",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "Jwt_Secret": "super-duper-secret-value-that-should-be-in-user-secrets"
@@ -34,7 +34,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/scalar/v1",
       "environmentVariables": {
         "ASPNETCORE_HTTPS_PORTS": "5001",
         "ASPNETCORE_HTTP_PORTS": "5000",

@@ -11,7 +11,16 @@ sealed class Complete : IEndpoint
 				Result result = await sender.Send(command, cancellationToken);
 				return result.Match(Results.NoContent, CustomResults.Problem);
 			})
+		.WithName("CompleteTodoById")
 		.WithTags(Tags.Todos)
+		.WithOpenApi(generatedOperation =>
+			{
+				generatedOperation.Summary = "Complete a To do by Id";
+				OpenApiParameter? parameter = generatedOperation.Parameters[0];
+				parameter.Description = "Complete a to do item for the specified identifier,";
+				parameter.Required = true;
+				return generatedOperation;
+			})
 		.RequireAuthorization()
 		.MapToApiVersion(1);
 }

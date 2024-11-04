@@ -1,4 +1,5 @@
-// Ignore Spelling: api
+// Ignore Spelling: api, Authorisation, Serilog
+using Scalar.AspNetCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -9,15 +10,13 @@ ApiVersion[] supportedApiVersions =
 
 builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
 
-builder.Services.AddSwaggerGenWithAuth();
-
 builder.Services
 	.AddApplication()
 	.AddPresentation()
 	.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
-builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddApiVersioning(opt =>
 {
 	opt.ApiVersionReader = ApiVersionReader.Combine(new UrlSegmentApiVersionReader(),
@@ -56,19 +55,34 @@ RouteGroupBuilder versionedGroup = app
 	.MapGroup("api/v{version:apiVersion}")
 	.WithApiVersionSet(apiVersionSet);
 
+app.UseHttpsRedirection();
+app.UseCors();
+
+// Map the endpoints
+app.MapHealthChecks("/health", new HealthCheckOptions { ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse });
 app.MapEndpoints(versionedGroup);
 
 if (app.Environment.IsDevelopment())
 {
-	_ = app.UseSwaggerWithUi();
+	_ = app.MapOpenApi();
+	_ = app.MapScalarApiReference(options =>
+	{
+		_ = options
+			.WithTitle("Clean Architecture API")
+			.AddMetadata("Description", "A sample of clean architecture, with Domain-Driven Design, Domain layers, CQRS, Cross-cutting concerns, Authentication & Authorisation (JWT), EF CORE, SQL Server, Serilog, .NET9, API versioning, and more")
+			.AddMetadata("ContactName", "George Leithead")
+			.AddMetadata("ContactUrl", "https://www.internetwideworld.com")
+			.AddMetadata("LicenseType", "MIT")
+			.AddMetadata("LicenseUrl", "https://github.com/GeorgeLeithead/CleanArchitecture/blob/master/LICENSE.md")
+			.AddMetadata("TermsOfService",
+				"https://github.com/GeorgeLeithead/CleanArchitecture/blob/master/TERMSOFSERVICE.md")
+			.WithModels(true)
+			.WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient)
+			.AddServer("/");
+	});
 
 	app.ApplyMigrations();
 }
-
-app.MapHealthChecks("health", new HealthCheckOptions
-{
-	ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-});
 
 app.UseRequestContextLogging();
 

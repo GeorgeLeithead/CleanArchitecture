@@ -1,5 +1,5 @@
 <Project>
-  <PropertyGroup>
+	<PropertyGroup>
 	<TargetFramework>net9.0</TargetFramework>
 	<ImplicitUsings>enable</ImplicitUsings>
 	<Nullable>enable</Nullable>
@@ -9,12 +9,11 @@
 	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	<CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
 	<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-	  <GenerateDocumentationFile>false</GenerateDocumentationFile>
-  </PropertyGroup>
-  <ItemGroup Condition="'$(MSBuildProjectExtension)' != '.dcproj'">
+	</PropertyGroup>
+	<ItemGroup Condition="'$(MSBuildProjectExtension)' != '.dcproj'">
 	<PackageReference Include="SonarAnalyzer.CSharp" Version="*">
-	  <PrivateAssets>all</PrivateAssets>
-	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		<PrivateAssets>all</PrivateAssets>
+		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	</PackageReference>
-  </ItemGroup>
+	</ItemGroup>
 </Project>
