@@ -9,7 +9,7 @@ static class DependencyInjection
 		_ = services.AddOpenApi(options => _ = options.AddDocumentTransformer<BearerSecuritySchemeTransformer>());
 
 		// REMARK: If you want to use Controllers, you'll need this.
-		_ = services.AddControllers();
+		////_ = services.AddControllers();
 
 		_ = services.AddExceptionHandler<GlobalExceptionHandler>();
 		_ = services.AddProblemDetails();

@@ -1,7 +1,6 @@
 ﻿// Ignore Spelling: todos
 
 namespace Web.Api.Endpoints.Todos;
-
 sealed class Complete : IEndpoint
 {
 	public void MapEndpoint(IEndpointRouteBuilder app) => _ = app
@@ -13,14 +12,12 @@ sealed class Complete : IEndpoint
 			})
 		.WithName("CompleteTodoById")
 		.WithTags(Tags.Todos)
-		.WithOpenApi(generatedOperation =>
-			{
-				generatedOperation.Summary = "Complete a To do by Id";
-				OpenApiParameter? parameter = generatedOperation.Parameters[0];
-				parameter.Description = "Complete a to do item for the specified identifier,";
-				parameter.Required = true;
-				return generatedOperation;
-			})
+		.WithOpenApi(generatedOperation => new(generatedOperation)
+		{
+			Summary = "Complete a To do by Id",
+			Description = "Mark a to do as complete and with an auto assigned Completed date and time.",
+			Parameters = [new OpenApiParameter() { Description = "Complete a to do item for the specified identifier,", Required = true }]
+		})
 		.RequireAuthorization()
-		.MapToApiVersion(1);
+		.MapToApiVersion(new ApiVersion(1, 0));
 }

@@ -6,10 +6,12 @@ sealed class ValidationPipelineBehavior<TRequest, TResponse>(IEnumerable<IValida
 {
 	public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
 	{
+		ArgumentNullException.ThrowIfNull(next);
+
 		ValidationFailure[] validationFailures = await ValidateAsync(request);
 		if (validationFailures.Length == 0)
 		{
-			return await next();
+			return await next().ConfigureAwait(false);
 		}
 
 		if (typeof(TResponse).IsGenericType && typeof(TResponse).GetGenericTypeDefinition() == typeof(Result<>))
@@ -50,7 +52,7 @@ sealed class ValidationPipelineBehavior<TRequest, TResponse>(IEnumerable<IValida
 
 		ValidationContext<TRequest> context = new(request);
 
-		ValidationResult[] validationResults = await Task.WhenAll(validators.Select(validator => validator.ValidateAsync(context)));
+		ValidationResult[] validationResults = await Task.WhenAll(validators.Select(validator => validator.ValidateAsync(context))).ConfigureAwait(false);
 
 		ValidationFailure[] validationFailures = validationResults
 			.Where(validationResult => !validationResult.IsValid)

@@ -1,4 +1,6 @@
-﻿namespace Application.Todos.Read;
+﻿namespace Application.Todos.GetAll;
+
+using Application.Extensions;
 
 sealed class GetTodosQueryHandler(IApplicationDbContext context, IUserContext userContext) : IQueryHandler<GetTodosQuery, List<TodoResponse>>
 {
@@ -22,6 +24,7 @@ sealed class GetTodosQueryHandler(IApplicationDbContext context, IUserContext us
 				CreatedAt = ((DateTimeOffset)todoItem.CreatedAt).LocalDateTime,
 				CompletedAt = todoItem.CompletedAt == null ? null : ((DateTimeOffset)todoItem.CompletedAt).LocalDateTime,
 			})
+			.Page(query.page, query.pageSize)
 			.ToListAsync(cancellationToken);
 
 		return todos;

@@ -13,5 +13,5 @@ sealed class Delete : IEndpoint
 			})
 		.WithTags(Tags.Todos)
 		.RequireAuthorization()
-		.MapToApiVersion(1);
+		.MapToApiVersion(new ApiVersion(1, 0));
 }

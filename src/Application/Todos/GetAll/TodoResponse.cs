@@ -1,4 +1,4 @@
-﻿namespace Application.Todos.Read;
+﻿namespace Application.Todos.GetAll;
 
 /// <summary>To do response.</summary>
 public sealed class TodoResponse

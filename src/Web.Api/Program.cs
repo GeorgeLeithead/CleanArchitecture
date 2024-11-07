@@ -1,11 +1,9 @@
 // Ignore Spelling: api, Authorisation, Serilog
-using Scalar.AspNetCore;
-
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 ApiVersion[] supportedApiVersions =
 [
-	new(1)
+	new(1.0)
 ];
 
 builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
@@ -14,13 +12,13 @@ builder.Services
 	.AddApplication()
 	.AddPresentation()
 	.AddInfrastructure(builder.Configuration);
+builder.AddBasicServiceDefaults();
 
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
 
-builder.Services.AddApiVersioning(opt =>
+IApiVersioningBuilder withApiVersioning = builder.Services.AddApiVersioning(opt =>
 {
-	opt.ApiVersionReader = ApiVersionReader.Combine(new UrlSegmentApiVersionReader(),
-		new HeaderApiVersionReader("x-api-version"), new MediaTypeApiVersionReader("x-api-version"));
+	opt.ApiVersionReader = ApiVersionReader.Combine(new UrlSegmentApiVersionReader(), new HeaderApiVersionReader("x-api-version"), new MediaTypeApiVersionReader("x-api-version"));
 	opt.DefaultApiVersion = supportedApiVersions[0];
 	opt.AssumeDefaultVersionWhenUnspecified = true;
 	opt.ReportApiVersions = true;
@@ -29,6 +27,7 @@ builder.Services.AddApiVersioning(opt =>
 	opt.GroupNameFormat = "'v'V";
 	opt.SubstituteApiVersionInUrl = true;
 });
+builder.AddDefaultOpenApi(withApiVersioning);
 
 // Configure options for reading and writing JSON
 builder.Services.ConfigureHttpJsonOptions(options =>
@@ -56,31 +55,15 @@ RouteGroupBuilder versionedGroup = app
 	.WithApiVersionSet(apiVersionSet);
 
 app.UseHttpsRedirection();
-app.UseCors();
+////app.UseCors();
 
 // Map the endpoints
-app.MapHealthChecks("/health", new HealthCheckOptions { ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse });
+app.MapDefaultEndpoints();
 app.MapEndpoints(versionedGroup);
+app.UseDefaultOpenApi();
 
 if (app.Environment.IsDevelopment())
 {
-	_ = app.MapOpenApi();
-	_ = app.MapScalarApiReference(options =>
-	{
-		_ = options
-			.WithTitle("Clean Architecture API")
-			.AddMetadata("Description", "A sample of clean architecture, with Domain-Driven Design, Domain layers, CQRS, Cross-cutting concerns, Authentication & Authorisation (JWT), EF CORE, SQL Server, Serilog, .NET9, API versioning, and more")
-			.AddMetadata("ContactName", "George Leithead")
-			.AddMetadata("ContactUrl", "https://www.internetwideworld.com")
-			.AddMetadata("LicenseType", "MIT")
-			.AddMetadata("LicenseUrl", "https://github.com/GeorgeLeithead/CleanArchitecture/blob/master/LICENSE.md")
-			.AddMetadata("TermsOfService",
-				"https://github.com/GeorgeLeithead/CleanArchitecture/blob/master/TERMSOFSERVICE.md")
-			.WithModels(true)
-			.WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient)
-			.AddServer("/");
-	});
-
 	app.ApplyMigrations();
 }
 
@@ -95,7 +78,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // REMARK: If you want to use Controllers, you'll need this.
-app.MapControllers();
+////app.MapControllers();
 
 await app.RunAsync();
 

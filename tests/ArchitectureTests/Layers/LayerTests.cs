@@ -1,7 +1,7 @@
 ﻿namespace ArchitectureTests.Layers;
 
 /// <summary>Layer tests.</summary>
-internal class LayerTests : BaseTest
+public class LayerTests : BaseTest
 {
 	/// <summary>Application layer - Should not have a dependency on the Infrastructure layer.</summary>
 	[Fact]

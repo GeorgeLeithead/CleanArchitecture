@@ -2,5 +2,5 @@
 
 sealed class CompleteTodoCommandValidator : AbstractValidator<CompleteTodoCommand>
 {
-	public CompleteTodoCommandValidator() => RuleFor(c => c.TodoItemId).NotEmpty();
+	public CompleteTodoCommandValidator() => RuleFor(c => c.TodoItemId).NotEmpty().WithMessage("Item identifier is required.");
 }

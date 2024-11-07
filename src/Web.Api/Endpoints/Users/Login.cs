@@ -14,5 +14,5 @@ sealed class Login : IEndpoint
 				return result.Match(Results.Ok, CustomResults.Problem);
 			})
 		.WithTags(Tags.Users)
-		.MapToApiVersion(1);
+		.MapToApiVersion(new ApiVersion(1, 0));
 }

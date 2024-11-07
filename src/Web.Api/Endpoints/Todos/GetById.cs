@@ -1,4 +1,6 @@
-﻿namespace Web.Api.Endpoints.Todos;
+﻿// Ignore Spelling: todos
+
+namespace Web.Api.Endpoints.Todos;
 
 sealed class GetById : IEndpoint
 {
@@ -11,5 +13,5 @@ sealed class GetById : IEndpoint
 			})
 		.WithTags(Tags.Todos)
 		.RequireAuthorization()
-		.MapToApiVersion(1);
+		.MapToApiVersion(new ApiVersion(1, 0));
 }

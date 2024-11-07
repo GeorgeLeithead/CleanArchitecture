@@ -76,7 +76,7 @@ By following these principles and practices, Clean Architecture helps create rob
     - Structured logging
   - [Seq](https://datalust.co/seq) support
 - Docker Support
-  - MicroService achitecture, see [.net Microservices](https://dotnet.microsoft.com/download/e-book/microservices-architecture/pdf)
+  - MicroService architecture, see [.net Microservices](https://dotnet.microsoft.com/download/e-book/microservices-architecture/pdf)
 - Testing projects
   - Architecture testing
 

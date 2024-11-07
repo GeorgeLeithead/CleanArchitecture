@@ -13,5 +13,5 @@ sealed class GetById : IEndpoint
 			})
 		.HasPermission(Permissions.UsersAccess)
 		.WithTags(Tags.Users)
-		.MapToApiVersion(1);
+		.MapToApiVersion(new ApiVersion(1, 0));
 }

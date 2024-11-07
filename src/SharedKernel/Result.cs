@@ -50,11 +50,10 @@ public class Result
 }
 
 /// <summary>Initializes a new instance of the <see cref="Result{TValue}" /> class.</summary>
-/// <typeparam name="TValue">Type value.</typeparam>
 /// <remarks>Result constructor.</remarks>
-/// <param name="value">Type value</param>
-/// <param name="isSuccess">Is Success indicator</param>
-/// <param name="error">An <see cref="Error"/> object.</param>
+/// <param name="value"></param>
+/// <param name="isSuccess"></param>
+/// <param name="error"></param>
 public class Result<TValue>(TValue? value, bool isSuccess, Error error) : Result(isSuccess, error)
 {
 	readonly TValue? value = value;
@@ -65,13 +64,14 @@ public class Result<TValue>(TValue? value, bool isSuccess, Error error) : Result
 
 	/// <summary>Result operator.</summary>
 	/// <param name="value">Value of result.</param>
+#pragma warning disable CA2225 // Operator overloads have named alternates
 	public static implicit operator Result<TValue>(TValue? value) => value is not null ? Success(value) : Failure<TValue>(Error.NullValue);
+#pragma warning restore CA2225 // Operator overloads have named alternates
 
 	/// <summary>Result validation failure.</summary>
 	/// <param name="error">The <see cref="Error"/>.</param>
 	/// <returns>A <see cref="Result{TValue}"/>.</returns>
-	public Result<TValue> ValidationFailure(Error error) => new(default, false, error);
-
-	/// <summary>Result operator.</summary>
-	public Result<TValue> ToResult() => value is not null ? Success(value) : Failure<TValue>(Error.NullValue);
+#pragma warning disable CA1000 // Do not declare static members on generic types
+	public static Result<TValue> ValidationFailure(Error error) => new(default, false, error);
+#pragma warning restore CA1000 // Do not declare static members on generic types
 }
