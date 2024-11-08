@@ -31,10 +31,7 @@ sealed class TodoItemConfiguration : IEntityTypeConfiguration<TodoItem>
 				v => (Priority)v // Convert Int16 to Int32 when reading from the database
 			);
 
-		_ = builder.Property(t => t.Labels).HasConversion(
-				v => string.Join(",", v), // Convert ReadOnlyCollection<string> to a comma delimited string when saving to the database
-				v => v.Split(",", System.StringSplitOptions.None).AsReadOnly() // Convert a comma delimited string to ReadOnlyCollection<string> when reading from the database
-			);
+		_ = builder.Property(t => t.Labels).HasConversion<CommaSplitStringConverter, SplitStringComparer>();
 
 		_ = builder.HasOne<User>().WithMany().HasForeignKey(t => t.UserId);
 	}

@@ -7,6 +7,7 @@ global using Domain.Todos;
 global using Domain.Users;
 global using Infrastructure.Authentication;
 global using Infrastructure.Authorization;
+global using Infrastructure.Converters;
 global using Infrastructure.Database;
 global using Infrastructure.Time;
 global using MediatR;
