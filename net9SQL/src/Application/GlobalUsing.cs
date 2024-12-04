@@ -1,0 +1,15 @@
+﻿global using System.Collections.ObjectModel;
+global using System.Reflection;
+global using Application.Abstractions.Authentication;
+global using Application.Abstractions.Behaviors;
+global using Application.Abstractions.Data;
+global using Application.Abstractions.Messaging;
+global using Domain.Todos;
+global using Domain.Users;
+global using FluentValidation;
+global using FluentValidation.Results;
+global using MediatR;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Logging;
+global using SharedKernel;

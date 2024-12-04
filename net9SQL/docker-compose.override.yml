@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  web-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - USER_SECRETS_ID=7af30323-108a-4923-bd46-e13b7648968c
+      - Jwt_Secret=super-duper-secret-value-that-should-be-in-user-secrets
+    ports:
+      - "8080"
+      - "8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

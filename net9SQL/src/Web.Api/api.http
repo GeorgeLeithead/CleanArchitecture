@@ -1,0 +1,48 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+### Request JWT Token
+@name authPasswordRequest
+POST https://localhost:5001/v1/users/login
+Content-Type: application/json
+
+{
+  "email": "joe@bloggs.com",
+  "password": "JoeBloggs"
+}
+
+### Use JWT Token to Call Protected Endpoint
+@token = {{authPasswordRequest.response.body}}
+#@token = eyJhbGciOiJIUzI1NiIsInR5cCI6Imp3ayJ9.eyJzdWIiOiI0N2Y0MGNiNy1lOWFmLTRkMzItOTliZC0xMDZmNjhiNDc3OTEiLCJlbWFpbCI6ImpvZUBibG9nZ3MuY29tIiwiZ2l2ZW5fbmFtZSI6IkpvZSIsImZhbWlseV9uYW1lIjoiQmxvZ2dzIiwibmJmIjoxNzMwNzM2ODA4LCJpYXQiOjE3MzA3MzY4MDgsImF1ZCI6ImRldmVsb3BlcnMiLCJpc3MiOiJjbGVhbi1hcmNoaXRlY3R1cmUiLCJleHAiOjE3MzA3NDA0MDh9.YuenvM3Qepis8GkTCSJZHfjeH01lAmpTDfMdK0xpmag
+
+GET  https://localhost:5001/v1/users/47F40CB7-E9AF-4D32-99BD-106F68B47791
+Authorization: Bearer {{token}}
+
+
+
+### Hard Coded - Use JWT Token to Call Protected Endpoint
+
+GET  https://localhost:5001/v1/users/47F40CB7-E9AF-4D32-99BD-106F68B47791
+Authorization: Bearer {{token}}
+
+### Create a TODO
+POST https://localhost:5001/v1/todos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "userId": "47F40CB7-E9AF-4D32-99BD-106F68B47791",
+  "description": "After the Converter added",
+  "dueDate": "2025-06-08T17:53:42.796Z",
+  "labels": [
+    "Alpha", "Beta", "Charlie", "Delta", "Gamma"
+  ],
+  "priority": 1
+}
+
+
+### GET ToDos
+GET https://localhost:5001/v1/todos?userId=47F40CB7-E9AF-4D32-99BD-106F68B47791
+Authorization: Bearer {{token}}
+
+### Complete a ToDo
+PUT https://localhost:5001/v1/todos/944a2d41-f308-4b21-8aa0-08dcfcebd19d/complete
+Authorization: Bearer {{token}}

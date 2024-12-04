@@ -1,0 +1,20 @@
+<Project>
+	<PropertyGroup>
+	<TargetFramework>net9.0</TargetFramework>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>enable</Nullable>
+
+	<AnalysisLevel>latest</AnalysisLevel>
+	<AnalysisMode>All</AnalysisMode>
+	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+	<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+		<NoWarn>NU1901;NU1902;NU1903;NU1904;IDE0130;CA1062</NoWarn>
+	</PropertyGroup>
+	<ItemGroup Condition="'$(MSBuildProjectExtension)' != '.dcproj'">
+	<PackageReference Include="SonarAnalyzer.CSharp" Version="*">
+		<PrivateAssets>all</PrivateAssets>
+		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+	</ItemGroup>
+</Project>
