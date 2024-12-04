@@ -1,0 +1,17 @@
+﻿global using System.Net.Mail;
+global using System.Reflection;
+global using System.Threading.Tasks;
+global using Application.Abstractions.Authentication;
+global using Application.Abstractions.Behaviors;
+global using Application.Abstractions.Messaging;
+global using Application.ConfigurationOptions;
+global using Domain.Users;
+global using FluentValidation;
+global using FluentValidation.Results;
+global using MediatR;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Identity.UI.Services;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Logging;
+global using Microsoft.Extensions.Options;
+global using SharedKernel;
