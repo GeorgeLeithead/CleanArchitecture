@@ -39,8 +39,8 @@ By following these principles and practices, Clean Architecture helps create rob
 ## Available versions in this repository
 | Name | Description |
 | --- | --- |
-| [net8](net8/README.MD) | The original 'clean architecture' implementation, targeting .net8 and Postgres DB. |
-| [net9SQL](net9SQL/README.MD) | Update from .net8 to .net9 and changed over from Postgres to SQL Server DB. |
-| [net9Aspire](net9Aspire/README.MD) | Updated from the net9SQL, to incorporate .net Aspire |
-| [net9MauiAspire](net9MauiAspire/README.MD) | Update from the net9SQL, to implement the UI via .net MAUI hybrid and using Aspire |
-| [withAspireAndIdentity](WithAspireAndIdentity/README.MD) | Update from the net9SQL, to implement the UI via Blazor Server and using Aspire |
+| [net8](net8/README.md) | The original 'clean architecture' implementation, targeting .net8 and Postgres DB. |
+| [net9SQL](net9SQL/README.md) | Update from .net8 to .net9 and changed over from Postgres to SQL Server DB. |
+| [net9Aspire](net9Aspire/README.md) | Updated from the net9SQL, to incorporate .net Aspire |
+| [net9MauiAspire](net9MauiAspire/README.md) | Update from the net9SQL, to implement the UI via .net MAUI hybrid and using Aspire |
+| [withAspireAndIdentity](WithAspireAndIdentity/README.md) | Update from the net9SQL, to implement the UI via Blazor Server and using Aspire |
